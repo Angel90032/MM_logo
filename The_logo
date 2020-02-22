@@ -1,0 +1,86 @@
+
+import math
+class Drawing:
+    ''' You can draw the MM logo as big as you want.The bigger the "n" the bigger the logo.'''
+    def __init__(self,n):
+        self.dash = "-"
+        self.star = "*"
+        self.n = n
+        self.top_rows = math.ceil(self.n /2)
+        self.bottom_rows = n - self.top_rows
+        self.first_dashes_count = n
+        self.stars_count = n
+        self.middle_dashes_count = n
+        self.last_dashes_count = n
+
+
+    def print_first_line(self):
+        ''' The first line always has a fixed count of "n" dashes and "n" stars.'''
+        print(f"{self.first_dashes_count * self.dash}{self.stars_count * self.star}{self.middle_dashes_count * self.dash}{self.stars_count * self.star}{self.last_dashes_count * self.dash}"
+            f"{self.first_dashes_count * self.dash}{self.stars_count * self.star}{self.middle_dashes_count * self.dash}{self.stars_count * self.star}{self.last_dashes_count * self.dash}")
+
+    def print_last_line(self):
+        '''The last line always has a fixed number of "n" stars and "n" dashes.'''
+        print(f"{self.n * self.star}{self.n * self.dash}{self.n * self.star}{self.n * self.dash}{self.n * self.star}", end = "")
+              #f"{self.n * self.star}{self.n * self.dash}{self.n * self.star}{self.n * dash}{self.n * self.star}")
+
+    def print_top_part(self):
+        ''' Following the logic of the task, we change the values for every iteration of the "for cicle". '''
+        for tr in range(1, self.top_rows):
+            self.first_dashes_count -= 1
+            self.stars_count += 2
+            self.middle_dashes_count -= 2
+            self.last_dashes_count -= 1
+
+            print(
+                f"{self.first_dashes_count * self.dash}{self.stars_count * self.star}{self.middle_dashes_count * self.dash}{self.stars_count * self.star}{self.last_dashes_count * self.dash}"
+                f"{self.first_dashes_count * self.dash}{self.stars_count * self.star}{self.middle_dashes_count * self.dash}{self.stars_count * self.star}{self.last_dashes_count * self.dash}")
+
+    def print_bottom_part(self):
+        ''' Not sure if this is a good practice but in order to make things easier for me I created new variables so I can visualise the "drawing" better :). '''
+        bottom_part_element_1 = self.first_dashes_count
+        bottom_part_element_2 = self.n
+        bottom_part_element_3 = self.middle_dashes_count
+        bottom_part_element_4 = self.stars_count
+        bottom_part_element_5 = self.middle_dashes_count
+        bottom_part_element_6 = self.n
+        bottom_part_element_7 = self.last_dashes_count
+        for bottom_row in range(1,self.bottom_rows+1):
+            if bottom_row == 1:
+                bottom_part_element_1 -= 1
+                bottom_part_element_7 -= 1
+
+            else:
+                bottom_part_element_1 -= 1
+                bottom_part_element_7 -= 1
+                bottom_part_element_3 += 2
+                bottom_part_element_4 -= 2
+                bottom_part_element_5 += 2
+            print(f"{bottom_part_element_1 * self.dash}{bottom_part_element_2 * self.star}{bottom_part_element_3 * self.dash}{bottom_part_element_4 * self.star}{bottom_part_element_5 * self.dash}{bottom_part_element_6 * self.star}{bottom_part_element_7 * self.dash}"
+                    f"{bottom_part_element_1 * self.dash}{bottom_part_element_2 * self.star}{bottom_part_element_3 * self.dash}{bottom_part_element_4 * self.star}{bottom_part_element_5 * self.dash}{bottom_part_element_6 * self.star}{bottom_part_element_7 * self.dash}")
+
+
+
+
+
+
+
+while True:
+    some_int = int(input("Please enter an odd number:\n"))
+
+    if some_int % 2 == 1:
+        print("Awesome ! Your number is a valid one.")
+        break
+    else:
+        print("Hey the number which you entered is not an odd one. The drawing will look ugly if done using an even number.\n")
+
+mm = Drawing(some_int)
+
+mm.print_first_line()
+mm.print_top_part()
+mm.print_bottom_part()
+mm.print_last_line()
+mm.print_last_line()
+
+
+
